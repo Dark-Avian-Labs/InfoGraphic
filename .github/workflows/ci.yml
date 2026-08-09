@@ -1,0 +1,107 @@
+name: InfoGraphic CI
+
+permissions:
+  contents: read
+  pull-requests: read
+
+env:
+  NODE_VERSION: 26
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  version:
+    runs-on: blacksmith-8vcpu-ubuntu-2404
+    timeout-minutes: 10
+    if: ${{ !contains(github.event.head_commit.message, 'chore(release)') && !contains(github.event.head_commit.message, 'build(release)') }}
+
+    permissions:
+      contents: write
+    outputs:
+      target_sha: ${{ steps.target.outputs.sha }}
+
+    steps:
+      - name: Checkout full history
+        uses: useblacksmith/checkout@v1
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.CI_PAT }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies (fresh lockfile)
+        uses: ./.github/actions/pnpm-install-fresh
+
+      - name: Bump version
+        run: pnpm exec semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.CI_PAT }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          MERGE_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+
+      - name: Resolve target SHA
+        id: target
+        shell: bash
+        run: |
+          git fetch origin main
+          echo "sha=$(git rev-parse origin/main)" >> "$GITHUB_OUTPUT"
+
+  validate:
+    runs-on: blacksmith-8vcpu-ubuntu-2404
+    timeout-minutes: 15
+    needs: [version]
+
+    steps:
+      - name: Checkout release target
+        uses: useblacksmith/checkout@v1
+        with:
+          ref: ${{ needs.version.outputs.target_sha }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+
+      - name: Install dependencies (fresh lockfile)
+        uses: ./.github/actions/pnpm-install-fresh
+
+      - name: Run quality checks
+        run: pnpm run validate
+
+      - name: Build project
+        run: pnpm run build
+
+  discord-status:
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    timeout-minutes: 10
+    needs: [version, validate]
+    if: ${{ always() && github.ref == 'refs/heads/main' }}
+
+    steps:
+      - name: Send Discord status
+        uses: iShark5060/actions-discord-status@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          job_results: ${{ join(needs.*.result, ',') }}
+          mention_on: failure
+          content: '<@${{ secrets.DISCORD_USERID }}>'
+          title: ${{ github.workflow }}
+          description: ${{ contains(needs.*.result, 'failure') && 'CI failed. Please review logs.' || contains(needs.*.result, 'cancelled') && 'CI was cancelled.' || contains(needs.*.result, 'skipped') && 'CI was skipped.' || 'CI succeeded.' }}
