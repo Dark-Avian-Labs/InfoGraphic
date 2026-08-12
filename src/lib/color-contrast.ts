@@ -36,20 +36,27 @@ function parseHexColor(color: string): Rgb | null {
   return null;
 }
 
+function hexChannel(value: number): string {
+  return Math.max(0, Math.min(255, Math.round(value)))
+    .toString(16)
+    .padStart(2, '0');
+}
+
 function rgbToHex({ r, g, b }: Rgb): string {
-  const channel = (value: number) =>
-    Math.max(0, Math.min(255, Math.round(value)))
-      .toString(16)
-      .padStart(2, '0');
-  return `#${channel(r)}${channel(g)}${channel(b)}`;
+  return `#${hexChannel(r)}${hexChannel(g)}${hexChannel(b)}`;
+}
+
+function linearizeSrgbChannel(value: number): number {
+  const srgb = value / 255;
+  return srgb <= 0.03928 ? srgb / 12.92 : ((srgb + 0.055) / 1.055) ** 2.4;
 }
 
 function relativeLuminance({ r, g, b }: Rgb): number {
-  const channel = (value: number) => {
-    const srgb = value / 255;
-    return srgb <= 0.03928 ? srgb / 12.92 : ((srgb + 0.055) / 1.055) ** 2.4;
-  };
-  return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b);
+  return (
+    0.2126 * linearizeSrgbChannel(r) +
+    0.7152 * linearizeSrgbChannel(g) +
+    0.0722 * linearizeSrgbChannel(b)
+  );
 }
 
 export function contrastRatio(foreground: string, background: string): number {
@@ -86,21 +93,21 @@ function rgbToHsl({ r, g, b }: Rgb): Hsl {
   return { h, s, l };
 }
 
+function hueToRgb(p: number, q: number, t: number): number {
+  let value = t;
+  if (value < 0) value += 1;
+  if (value > 1) value -= 1;
+  if (value < 1 / 6) return p + (q - p) * 6 * value;
+  if (value < 1 / 2) return q;
+  if (value < 2 / 3) return p + (q - p) * (2 / 3 - value) * 6;
+  return p;
+}
+
 function hslToRgb({ h, s, l }: Hsl): Rgb {
   if (s === 0) {
     const gray = l * 255;
     return { r: gray, g: gray, b: gray };
   }
-
-  const hueToRgb = (p: number, q: number, t: number) => {
-    let value = t;
-    if (value < 0) value += 1;
-    if (value > 1) value -= 1;
-    if (value < 1 / 6) return p + (q - p) * 6 * value;
-    if (value < 1 / 2) return q;
-    if (value < 2 / 3) return p + (q - p) * (2 / 3 - value) * 6;
-    return p;
-  };
 
   const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
   const p = 2 * l - q;

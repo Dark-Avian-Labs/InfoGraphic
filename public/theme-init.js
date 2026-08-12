@@ -1,22 +1,23 @@
+function readCookie(name) {
+  var part = document.cookie
+    .split(';')
+    .map(function (p) {
+      return p.trim();
+    })
+    .find(function (p) {
+      return p.substring(0, name.length + 1) === name + '=';
+    });
+  if (!part) return '';
+  try {
+    return decodeURIComponent(part.slice(name.length + 1));
+  } catch {
+    return '';
+  }
+}
+
 (function () {
   try {
     var root = document.documentElement;
-    function readCookie(name) {
-      var part = document.cookie
-        .split(';')
-        .map(function (p) {
-          return p.trim();
-        })
-        .find(function (p) {
-          return p.substring(0, name.length + 1) === name + '=';
-        });
-      if (!part) return '';
-      try {
-        return decodeURIComponent(part.slice(name.length + 1));
-      } catch {
-        return '';
-      }
-    }
     var theme = readCookie('dal.theme.mode').trim();
     if (theme !== 'light' && theme !== 'dark') {
       try {

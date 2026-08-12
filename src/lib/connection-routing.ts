@@ -189,7 +189,7 @@ function laneStackOffset(doc: InfographicDocument, connection: InfographicConnec
       const cMax = Math.max(cx, dx);
       return cMax >= minX - 40 && cMin <= maxX + 40;
     })
-    .sort((a, b) => a.i - b.i);
+    .toSorted((a, b) => a.i - b.i);
 
   const rank = siblings.findIndex((s) => s.c.id === connection.id);
   const center = (siblings.length - 1) / 2;

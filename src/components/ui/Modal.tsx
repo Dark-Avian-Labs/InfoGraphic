@@ -9,6 +9,10 @@ interface ModalProps {
   ariaLabelledBy?: string;
 }
 
+function stopPropagation(event: MouseEvent<HTMLDivElement>) {
+  event.stopPropagation();
+}
+
 export function Modal({ open, onClose, children, className, ariaLabelledBy }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const onCloseRef = useRef(onClose);
@@ -133,10 +137,6 @@ export function Modal({ open, onClose, children, className, ariaLabelledBy }: Mo
   }
 
   const modalClassName = className ? `modal ${className}` : 'modal';
-
-  const stopPropagation = (event: MouseEvent<HTMLDivElement>) => {
-    event.stopPropagation();
-  };
 
   const modalContent = (
     <div className="modal-overlay active" onClick={onClose}>
