@@ -81,7 +81,7 @@ export function collectLaneYValues(lanes: number[], exclude?: number): number[] 
     if (exclude !== undefined && Math.abs(lane - exclude) < 0.01) continue;
     unique.add(lane);
   }
-  return [...unique].sort((a, b) => a - b);
+  return [...unique].toSorted((a, b) => a - b);
 }
 
 export function collectRiserXValues(risers: number[], exclude?: number): number[] {
@@ -90,5 +90,5 @@ export function collectRiserXValues(risers: number[], exclude?: number): number[
     if (exclude !== undefined && Math.abs(riser - exclude) < 0.01) continue;
     unique.add(riser);
   }
-  return [...unique].sort((a, b) => a - b);
+  return [...unique].toSorted((a, b) => a - b);
 }
