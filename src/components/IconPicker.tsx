@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { getBrandIcon } from '../lib/brand-icons';
+import { BrandIcon } from '../lib/brand-icons';
 import { HOMELAB_ICON_SLUGS, loadIconCatalog, type IconCatalogEntry } from '../lib/icon-catalog';
 import { Modal } from './Modal';
 
@@ -13,19 +13,19 @@ interface IconPickerProps {
 
 export function IconPicker({ open, value, onClose, onSelect }: IconPickerProps) {
   const [query, setQuery] = useState('');
-  const [catalog, setCatalog] = useState<IconCatalogEntry[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [catalog, setCatalog] = useState<IconCatalogEntry[] | null>(null);
 
   useEffect(() => {
     if (!open) return;
-    setLoading(true);
     void loadIconCatalog().then((entries) => {
       setCatalog(entries);
-      setLoading(false);
     });
   }, [open]);
 
+  const loading = open && catalog === null;
+
   const filtered = useMemo(() => {
+    if (!catalog) return [];
     const q = query.trim().toLowerCase();
     if (!q) {
       const homelab = catalog.filter((entry) => HOMELAB_ICON_SLUGS.includes(entry.slug));
@@ -63,7 +63,6 @@ export function IconPicker({ open, value, onClose, onSelect }: IconPickerProps) 
       ) : (
         <div className="icon-grid">
           {filtered.map((entry) => {
-            const Icon = getBrandIcon(entry.slug);
             const selected = value === entry.slug;
             return (
               <button
@@ -73,7 +72,9 @@ export function IconPicker({ open, value, onClose, onSelect }: IconPickerProps) 
                 onClick={() => onSelect(entry.slug)}
                 title={entry.title}
               >
-                {Icon ? <Icon color={entry.hex} size={22} /> : <span className="icon-fallback" />}
+                <BrandIcon slug={entry.slug} color={entry.hex} size={22}>
+                  <span className="icon-fallback" />
+                </BrandIcon>
                 <span>{entry.title}</span>
               </button>
             );

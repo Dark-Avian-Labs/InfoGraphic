@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-08-09T21:15:00Z",
+  "updatedAt": "2026-08-19T18:00:00Z",
   "command": "update",
-  "gitHead": "none",
-  "model": "Cursor Grok 4.5"
+  "gitHead": "6b8a35b0505b47eaead1c79e475291d59aadb559",
+  "model": "Cursor Grok 4.6"
 }

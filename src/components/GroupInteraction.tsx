@@ -83,7 +83,6 @@ interface GroupSelectLayerProps {
   onMove?: (groupId: string, x: number, y: number) => void;
 }
 
-/** Behind nodes — empty cluster interior (devices stay clickable on top). */
 export function GroupSelectLayer(props: GroupSelectLayerProps) {
   const { handlePointerDown, handleClick } = useGroupPointerHandlers(props);
   const { group, interactive } = props;
@@ -119,7 +118,6 @@ interface GroupOverlayProps {
 const HEADER_HEIGHT = 28;
 const BORDER_HIT = 10;
 
-/** Above connections — header, border, resize handle. */
 export function GroupOverlay({
   group,
   selected,

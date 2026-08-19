@@ -9,7 +9,6 @@ import { NetworkPortIcon } from './NetworkPortIcon';
 
 export const PORT_LABEL_OFFSET = 12;
 
-/** Y offset for port label text relative to the port icon center (inward toward device body) */
 export function getPortLabelLocalY(port: NetworkPort) {
   return port.side === 'bottom'
     ? -(PORT_CELL_H / 2 + PORT_LABEL_OFFSET)
@@ -30,7 +29,6 @@ interface NetworkPortHandleProps {
   selected?: boolean;
   pending?: boolean;
   onClick?: (portId: string) => void;
-  /** When false, only the jack icon is drawn (labels rendered in a separate layer) */
   showLabel?: boolean;
 }
 
@@ -97,7 +95,6 @@ interface NetworkPortLabelProps {
   highlight?: boolean;
 }
 
-/** Port labels drawn inward on the device surface */
 export function NetworkPortLabel({
   node,
   port,
@@ -107,7 +104,6 @@ export function NetworkPortLabel({
 }: NetworkPortLabelProps) {
   const { localX, localY } = getPortHandleLocalPosition(node, port);
   const surfaceText = getSurfaceTextColors(canvasTheme);
-  // Always use surface text (readable on white cards); selection only boosts weight.
   const fill = wireColor ? wiredPortLabelOnSurface(wireColor) : surfaceText.secondary;
 
   return (

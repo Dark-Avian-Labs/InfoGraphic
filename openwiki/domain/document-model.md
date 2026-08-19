@@ -68,7 +68,7 @@ Routing is orthogonal with a shared horizontal "lane" between the two ports, com
 
 - fills document defaults — `width` 1600, `height` 1100, empty arrays for `vlans` / `connectionTypes` / `groups` / `deviceLists`, and a default `legend` position;
 - ensures every node has ports and port banks, injecting kind defaults when absent, then snaps node dimensions;
-- **migrates legacy shapes**: node-level connections (`{ from, to }` node IDs) are converted to port-level (`{ fromPortId, toPortId }`) by picking a sensible port on the facing side (`pickPortForPeer`); legacy port `offset` is migrated to `row`/`col` (`migratePort`);
+- **migrates legacy shapes**: node-level connections (`{ from, to }` node IDs) are converted to port-level (`{ fromPortId, toPortId }`) by picking a sensible port on the facing side (`pickPortForPeer`); `migratePort` keeps only `id` / `label` / `side` / `row` / `col`;
 - **copies connection routing fields** (`lane`, `fromRiserOffset`, `toRiserOffset`) — omitting a field here silently drops it on every edit;
 - **prunes orphans**: connections whose endpoints can't be resolved are dropped.
 
@@ -78,7 +78,6 @@ Routing is orthogonal with a shared horizontal "lane" between the two ports, com
 
 - **Ports are the join key.** Deleting a node/port or shrinking a bank invalidates connections; the editor prunes them, and `normalizeDocument` drops any that survive with dangling IDs.
 - **Legacy `from`/`to` connections only migrate if both nodes exist** at load time — otherwise the connection is silently dropped.
-- **Deprecated fields** remain for backward compatibility: `NetworkPort.offset` (migrated to `row`/`col`) and `pointsToPath` (use `pointsToRoundedPath`). Don't write new code against them.
 - **`row`/`col` are grid indices**, not pixels — actual positions are derived at render time, so bank layout changes reflow ports automatically.
 
 # Key source references

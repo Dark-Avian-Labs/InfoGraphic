@@ -4,7 +4,6 @@ interface NetworkPortIconProps {
   stroke?: string;
 }
 
-/** RJ45 jack silhouette inside a rounded square */
 export function NetworkPortIcon({
   size = 14,
   fill = '#f1f5f9',
@@ -26,7 +25,6 @@ export function NetworkPortIcon({
         stroke={stroke}
         strokeWidth={1.2}
       />
-      {/* Jack opening */}
       <rect
         x={-w * 0.28}
         y={-h * 0.12}
@@ -36,13 +34,11 @@ export function NetworkPortIcon({
         fill={stroke}
         opacity={0.25}
       />
-      {/* Clip tab */}
       <path
         d={`M ${-w * 0.1} ${-h * 0.12} L 0 ${-h * 0.32} L ${w * 0.1} ${-h * 0.12} Z`}
         fill={stroke}
         opacity={0.35}
       />
-      {/* Contact pins */}
       {[-0.18, -0.09, 0, 0.09, 0.18].map((ox) => (
         <rect
           key={ox}

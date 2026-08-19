@@ -244,9 +244,4 @@ export function pointsToRoundedPath(
   return parts.join(' ');
 }
 
-/** @deprecated use pointsToRoundedPath */
-export function pointsToPath(points: { x: number; y: number }[]) {
-  return pointsToRoundedPath(points);
-}
-
 export { CORNER_RADIUS };

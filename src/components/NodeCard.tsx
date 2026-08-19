@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
 import type { CanvasThemeMode } from '../hooks/useCanvasTheme';
-import { getBrandColor, getBrandIcon } from '../lib/brand-icons';
+import { BrandIcon, getBrandColor } from '../lib/brand-icons';
 import { frameAccentOnCanvas } from '../lib/canvas-colors';
 import { getSurfaceTextColors } from '../lib/canvas-theme';
 import type { InfographicNode, Vlan } from '../types';
@@ -60,7 +60,6 @@ export function NodeCard({
   const accentColor = vlan?.color ?? kindAccent[node.kind];
   const frameColor = frameAccentOnCanvas(accentColor, canvasTheme);
   const surfaceText = getSurfaceTextColors(canvasTheme);
-  const BrandIcon = getBrandIcon(node.brandIcon);
   const brandColor = getBrandColor(node.brandIcon) ?? accentColor;
   const dragState = useRef<{ offsetX: number; offsetY: number } | null>(null);
   const resizeState = useRef<{
@@ -208,9 +207,9 @@ export function NodeCard({
         rx={4}
       />
 
-      {BrandIcon && (
+      {node.brandIcon && (
         <foreignObject x={width - 46} y={CONTENT_TOP} width={24} height={24}>
-          <BrandIcon color={brandColor} size={22} />
+          <BrandIcon slug={node.brandIcon} color={brandColor} size={22} />
         </foreignObject>
       )}
 

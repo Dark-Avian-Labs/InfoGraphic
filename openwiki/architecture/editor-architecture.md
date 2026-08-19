@@ -58,7 +58,7 @@ The hook returns a flat API object consumed almost entirely by `App` and `Proper
 `App.tsx` wires the hook to the UI:
 
 - **Header actions** — add device (opens `DevicePicker`), add cluster (`editor.addGroup`), toggle connect mode, load example, export SVG/PNG.
-- **Sidebar** — a `design` tab renders `PropertiesPanel` (edits the current selection); a `json` tab renders a `<textarea>` whose contents are applied via `parseDocument` on **Apply JSON**. Switching back to `design` re-serializes the live document so the JSON view stays in sync.
+- **Sidebar** — a `design` tab renders `PropertiesPanel` (edits the current selection); a `json` tab renders a `<textarea>` whose contents are applied via `parseDocument` on **Apply JSON**. Opening the JSON tab snapshots the live document into the textarea.
 - **Global Esc** — a `keydown` listener clears pending connections and all selections.
 - **Pickers** — `DevicePicker` (generic silhouettes → `addDevice`) and `IconPicker` (Simple Icons slug → `updateNode({ brandIcon })`).
 

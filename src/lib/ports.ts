@@ -95,7 +95,6 @@ export function setPortBankOnNode(
   };
 }
 
-/** Smallest grid-aligned size that fits port banks and basic card content */
 export function minNodeDimensions(node: InfographicNode): { width: number; height: number } {
   const minHeight = DEVICE_GRID * 2;
   let minWidth = DEVICE_GRID * 3;
@@ -179,27 +178,12 @@ export function defaultPortBanksForKind(kind: DeviceKind): PortBank[] {
 }
 
 export function migratePort(port: NetworkPort): NetworkPort {
-  if (
-    port.row !== undefined &&
-    port.col !== undefined &&
-    (port.side === 'top' || port.side === 'bottom')
-  ) {
-    return port;
-  }
-
-  const legacySide = port.side as string;
-  const side: PortBankSide =
-    legacySide === 'top' || legacySide === 'bottom' ? legacySide : 'bottom';
-
-  const col = port.col ?? Math.min(15, Math.round((port.offset ?? 0.5) * 8));
-  const row = port.row ?? 0;
-
   return {
     id: port.id,
     label: port.label,
-    side,
-    row,
-    col,
+    side: port.side === 'top' ? 'top' : 'bottom',
+    row: port.row,
+    col: port.col,
   };
 }
 

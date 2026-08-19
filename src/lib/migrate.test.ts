@@ -74,4 +74,34 @@ describe('normalizeDocument', () => {
     expect(normalized.connections[0].fromPortId).toBe('a-p1');
     expect(normalized.connections[0].toPortId).toBe('b-p1');
   });
+
+  it('keeps only canonical port fields', () => {
+    const normalized = normalizeDocument({
+      ...baseDoc,
+      nodes: [
+        {
+          ...baseDoc.nodes[0],
+          ports: [
+            {
+              id: 'a-p1',
+              label: '1',
+              side: 'bottom',
+              row: 0,
+              col: 0,
+              offset: 0.5,
+            },
+          ],
+        },
+        baseDoc.nodes[1],
+      ],
+    } as unknown as InfographicDocument);
+
+    expect(normalized.nodes[0].ports[0]).toEqual({
+      id: 'a-p1',
+      label: '1',
+      side: 'bottom',
+      row: 0,
+      col: 0,
+    });
+  });
 });

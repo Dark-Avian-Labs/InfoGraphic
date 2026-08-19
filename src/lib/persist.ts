@@ -1,7 +1,6 @@
 import type { InfographicDocument } from '../types';
 import { parseDocument } from './document';
 
-/** Client-only draft of the open diagram. No server, no cookies. */
 export const DOCUMENT_STORAGE_KEY = 'infographic:document:v1';
 
 function storage(): Storage | undefined {

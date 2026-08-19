@@ -1,4 +1,4 @@
-import { getBrandColor, getBrandIcon } from '../lib/brand-icons';
+import { BrandIcon, getBrandColor } from '../lib/brand-icons';
 import { DEVICE_GRID } from '../lib/grid';
 import { getGroupColor } from '../lib/groups';
 import { PORT_BANK_PRESETS, findPort } from '../lib/ports';
@@ -380,7 +380,6 @@ export function PropertiesPanel({
           <span>Devices</span>
           <ul className="port-list port-list--labels">
             {deviceList.devices.map((device, index) => {
-              const Icon = getBrandIcon(device.icon);
               const color = getBrandColor(device.icon) ?? '#64748b';
               return (
                 <li
@@ -393,7 +392,9 @@ export function PropertiesPanel({
                     onClick={() => onPickDeviceListIcon(deviceList.id, index)}
                     aria-label="Pick icon"
                   >
-                    {Icon ? <Icon color={color} size={16} /> : <span className="icon-fallback" />}
+                    <BrandIcon slug={device.icon} color={color} size={16}>
+                      <span className="icon-fallback" />
+                    </BrandIcon>
                   </button>
                   <input
                     className="field-input"
@@ -551,7 +552,6 @@ export function PropertiesPanel({
     );
   }
 
-  const BrandIcon = getBrandIcon(node.brandIcon);
   const brandColor = getBrandColor(node.brandIcon) ?? '#64748b';
 
   return (
@@ -619,8 +619,10 @@ export function PropertiesPanel({
       <div className="field">
         <span>Brand icon</span>
         <button type="button" className="icon-picker-trigger" onClick={onPickIcon}>
-          {BrandIcon ? (
-            <BrandIcon color={brandColor} size={20} />
+          {node.brandIcon ? (
+            <BrandIcon slug={node.brandIcon} color={brandColor} size={20}>
+              <span className="icon-fallback" />
+            </BrandIcon>
           ) : (
             <span className="icon-fallback" />
           )}

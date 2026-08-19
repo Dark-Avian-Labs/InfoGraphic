@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react';
+import { useEffect, useRef, type MouseEvent, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 
 interface ModalProps {
@@ -16,15 +16,10 @@ function stopPropagation(event: MouseEvent<HTMLDivElement>) {
 export function Modal({ open, onClose, children, className, ariaLabelledBy }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const onCloseRef = useRef(onClose);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     onCloseRef.current = onClose;
   }, [onClose]);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     if (!open) {
@@ -154,7 +149,7 @@ export function Modal({ open, onClose, children, className, ariaLabelledBy }: Mo
     </div>
   );
 
-  if (!mounted || typeof document === 'undefined' || !document.body) {
+  if (typeof document === 'undefined' || !document.body) {
     return null;
   }
 

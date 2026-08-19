@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
 import type { CanvasThemeMode } from '../hooks/useCanvasTheme';
-import { getBrandColor, getBrandIcon } from '../lib/brand-icons';
+import { BrandIcon, getBrandColor } from '../lib/brand-icons';
 import { frameAccentOnCanvas, strokeOnPanel, textOnSolidAccent } from '../lib/canvas-colors';
 import { getCanvasThemeTokens } from '../lib/canvas-theme';
 import type { ConnectionType, DeviceList, Vlan } from '../types';
@@ -298,15 +298,14 @@ export function DeviceListPanel({
 
       <g className="canvas-surface" pointerEvents="none">
         {list.devices.map((device, index) => {
-          const Icon = getBrandIcon(device.icon);
           const color = getBrandColor(device.icon) ?? '#64748b';
           const rowY = headerHeight + 6 + index * rowHeight;
 
           return (
             <g key={device.name} transform={`translate(12, ${rowY})`}>
-              {Icon ? (
+              {device.icon ? (
                 <foreignObject width={18} height={18}>
-                  <Icon color={color} size={16} />
+                  <BrandIcon slug={device.icon} color={color} size={16} />
                 </foreignObject>
               ) : (
                 <circle cx={8} cy={8} r={5} fill={accentColor} opacity={0.5} />
