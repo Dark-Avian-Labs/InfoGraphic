@@ -10,7 +10,9 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.x-06B6D4?logo=tailwindcss&logoColor=white)
 [![Cursor](https://img.shields.io/badge/Cursor-IDE-141414?logo=cursor&logoColor=white)](https://cursor.com)
 
-A local-first homelab and network topology infographic generator. Define your infrastructure visually or as JSON and render shareable diagrams with VLAN colors, brand icons, grouped clusters, connection styles, and device lists — inspired by detailed homelab maps like [this example](https://www.reddit.com/media?url=https%3A%2F%2Fi.redd.it%2Fqabah1o620a91.png).
+A local-first editor that turns a homelab or network topology into a shareable SVG or PNG diagram. Drag devices, wire ports, group clusters, or edit the same document as JSON. Brand icons, VLAN colors, and orthogonal routing keep the map readable. Everything runs in the browser. No backend, database, or account.
+
+Inspired by detailed homelab maps like [this example](https://www.reddit.com/media?url=https%3A%2F%2Fi.redd.it%2Fqabah1o620a91.png).
 
 ## Features
 
@@ -19,7 +21,7 @@ A local-first homelab and network topology infographic generator. Define your in
 - Editable legend and device-list panels; localStorage autosave
 - Brand icons via the searchable [Simple Icons](https://simpleicons.org) catalog
 - SVG and 2× PNG export
-- Fully local — no backend, database, or accounts
+- Fully local. No backend, database, or accounts
 
 ## Requirements
 
