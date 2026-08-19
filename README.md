@@ -83,13 +83,13 @@ Connections are stored as `fromPortId` / `toPortId`. Legacy `from` / `to` node I
 ```json
 {
   "ports": [
-    { "id": "pfsense-wan", "label": "WAN", "side": "left", "offset": 0.5 },
-    { "id": "pfsense-lan", "label": "LAN", "side": "right", "offset": 0.5 }
+    { "id": "pfsense-wan", "label": "WAN", "side": "top", "row": 0, "col": 0 },
+    { "id": "pfsense-lan", "label": "LAN", "side": "bottom", "row": 0, "col": 0 }
   ]
 }
 ```
 
-`offset` is 0–1 along the chosen edge (`top`, `right`, `bottom`, `left`).
+`row` and `col` are grid indices in the port bank on that side (`top` or `bottom`).
 
 ## Export
 

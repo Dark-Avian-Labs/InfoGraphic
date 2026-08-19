@@ -17,7 +17,6 @@ import { loadPersistedDocument, persistDocument } from './lib/persist';
 
 type SidebarTab = 'design' | 'json';
 
-/** Coalesce rapid drag updates; discrete edits still feel instant. */
 const AUTOSAVE_DEBOUNCE_MS = 50;
 
 function App() {
@@ -35,14 +34,9 @@ function App() {
     { kind: 'node' } | { kind: 'deviceListEntry'; listId: string; index: number } | null
   >(null);
 
-  documentRef.current = editor.document;
-
   useEffect(() => {
-    if (sidebarTab === 'design') {
-      setJsonValue(serializeDocument(editor.document));
-      setJsonError(null);
-    }
-  }, [editor.document, sidebarTab]);
+    documentRef.current = editor.document;
+  }, [editor.document]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -203,14 +197,21 @@ function App() {
             <button
               type="button"
               className={`sidebar-tab${sidebarTab === 'design' ? ' sidebar-tab--active' : ''}`}
-              onClick={() => setSidebarTab('design')}
+              onClick={() => {
+                setSidebarTab('design');
+                setJsonError(null);
+              }}
             >
               Design
             </button>
             <button
               type="button"
               className={`sidebar-tab${sidebarTab === 'json' ? ' sidebar-tab--active' : ''}`}
-              onClick={() => setSidebarTab('json')}
+              onClick={() => {
+                setJsonValue(serializeDocument(editor.document));
+                setJsonError(null);
+                setSidebarTab('json');
+              }}
             >
               JSON
             </button>

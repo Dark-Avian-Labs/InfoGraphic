@@ -41,8 +41,6 @@ export interface NetworkPort {
   side: PortBankSide;
   row: number;
   col: number;
-  /** @deprecated legacy — migrated to row/col */
-  offset?: number;
 }
 
 export interface InfographicNode {
@@ -73,7 +71,6 @@ export interface InfographicGroup {
   width: number;
   height: number;
   vlanId?: string;
-  /** Custom border/header color; falls back to VLAN color */
   color?: string;
   dashed?: boolean;
   subtitle?: string;
@@ -85,13 +82,9 @@ export interface InfographicConnection {
   toPortId: string;
   typeId: string;
   label?: string;
-  /** Override connection type color for this link */
   color?: string;
-  /** Y coordinate of the horizontal routing lane (draggable) */
   lane?: number;
-  /** Horizontal offset of the from-side vertical riser from the from-port stub X */
   fromRiserOffset?: number;
-  /** Horizontal offset of the to-side vertical riser from the to-port stub X */
   toRiserOffset?: number;
 }
 
@@ -125,7 +118,6 @@ export interface InfographicDocument {
   nodes: InfographicNode[];
   connections: InfographicConnection[];
   deviceLists?: DeviceList[];
-  /** Top-left of the VLAN/connection legend panel */
   legend?: LegendPosition;
 }
 

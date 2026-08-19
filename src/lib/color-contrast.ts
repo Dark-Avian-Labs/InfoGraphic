@@ -152,7 +152,6 @@ function nudgeForContrast(
   return lighten ? fallbackLight : fallbackDark;
 }
 
-/** Nudge a color lighter or darker until it meets minimum contrast against a background. */
 export function ensureContrast(
   foreground: string,
   background: string,
@@ -190,7 +189,6 @@ export function blendOver(background: string, foreground: string, alpha: number)
   });
 }
 
-/** Pick readable body text on a solid or blended background. */
 export function readableTextOn(
   background: string,
   options?: { preferred?: string; light?: string; dark?: string },

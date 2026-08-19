@@ -9,7 +9,7 @@ function readStoredMode(): CanvasThemeMode {
     const stored = window.localStorage.getItem(STORAGE_KEY);
     if (stored === 'light' || stored === 'dark') return stored;
   } catch {
-    /* ignore */
+    // ignore
   }
   return 'light';
 }
@@ -21,7 +21,7 @@ export function useCanvasTheme() {
     try {
       window.localStorage.setItem(STORAGE_KEY, mode);
     } catch {
-      /* ignore */
+      // ignore
     }
   }, [mode]);
 

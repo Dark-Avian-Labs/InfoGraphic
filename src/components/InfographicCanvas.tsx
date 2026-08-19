@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 import type { CanvasThemeMode } from '../hooks/useCanvasTheme';
 import type { EditorMode } from '../hooks/useDocumentEditor';
@@ -84,16 +84,12 @@ export function InfographicCanvas({
   const selectMode = interactive && mode === 'select';
   const [previewPoint, setPreviewPoint] = useState<{ x: number; y: number } | null>(null);
   const [hoverPortId, setHoverPortId] = useState<string | null>(null);
+  const connecting = Boolean(connectMode && pendingPortId);
+  const livePreview = connecting ? previewPoint : null;
+  const liveHover = connecting ? hoverPortId : null;
 
   const laneGuides = useMemo(() => getVisibleLaneGuides(document), [document]);
   const riserGuides = useMemo(() => getVisibleRiserGuides(document), [document]);
-
-  useEffect(() => {
-    if (!connectMode || !pendingPortId) {
-      setPreviewPoint(null);
-      setHoverPortId(null);
-    }
-  }, [connectMode, pendingPortId]);
 
   const clientToSvg = (clientX: number, clientY: number) => {
     const svg = svgRef.current;
@@ -250,7 +246,6 @@ export function InfographicCanvas({
           />
         ))}
 
-      {/* Connection visuals — clipped to canvas bounds */}
       <g clipPath="url(#canvas-clip)">
         {routedConnections.map(({ connection, route, type, strokeColor }) => (
           <ConnectionLine
@@ -263,12 +258,12 @@ export function InfographicCanvas({
             selected={selectedConnectionId === connection.id}
           />
         ))}
-        {connectMode && pendingPortId && previewPoint && (
+        {connectMode && pendingPortId && livePreview && (
           <ConnectionRubberBand
             document={document}
             fromPortId={pendingPortId}
-            pointer={previewPoint}
-            hoverPortId={hoverPortId}
+            pointer={livePreview}
+            hoverPortId={liveHover}
           />
         )}
       </g>
@@ -284,7 +279,7 @@ export function InfographicCanvas({
           interactive={interactive}
           connectMode={connectMode}
           pendingPortId={pendingPortId}
-          hoverPortId={hoverPortId}
+          hoverPortId={liveHover}
           portWireColors={portWireColors}
           canvasTheme={canvasTheme}
           onSelect={onSelectNode}
@@ -295,7 +290,6 @@ export function InfographicCanvas({
         />
       ))}
 
-      {/* Connection hit targets — below cluster chrome so header/border clicks select clusters */}
       {selectMode &&
         routedConnections.map(({ connection, route, type, strokeColor }) => (
           <ConnectionLine
@@ -340,7 +334,6 @@ export function InfographicCanvas({
           />
         ))}
 
-      {/* Panels above hit targets so they stay draggable */}
       {document.deviceLists?.map((list) => (
         <DeviceListPanel
           key={list.id}
@@ -414,7 +407,6 @@ function buildRubberBandPoints(
   const from = findPort(doc, fromPortId);
   if (!from) return null;
 
-  // Snapped to a port: use the same router as finalized connections.
   if (hoverPortId) {
     const previewConnection = {
       id: '__preview__',
@@ -436,7 +428,6 @@ function buildRubberBandPoints(
     y: start.y + fromEgress.dy * PORT_STUB,
   };
 
-  // Free cursor: keep a light orthogonal follow while searching for a port.
   const laneY = pointer.y;
   return [start, startStub, { x: startStub.x, y: laneY }, { x: pointer.x, y: laneY }];
 }

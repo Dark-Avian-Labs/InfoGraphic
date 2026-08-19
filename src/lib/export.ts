@@ -14,7 +14,6 @@ const EXPORT_STYLE_PROPS = [
   'letter-spacing',
 ] as const;
 
-/** Clone an on-screen canvas SVG and bake computed paints so exports work without App.css. */
 export function prepareSvgForExport(svgElement: SVGSVGElement): SVGSVGElement {
   const clone = svgElement.cloneNode(true) as SVGSVGElement;
   clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
@@ -37,7 +36,6 @@ export function prepareSvgForExport(svgElement: SVGSVGElement): SVGSVGElement {
     }
   }
 
-  // Drop interactive chrome from exports
   clone
     .querySelectorAll(
       '[data-export-ignore="true"], .lane-guides, .riser-guides, .node-resize-handle',
