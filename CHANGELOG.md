@@ -7,3 +7,4 @@ All notable changes to InfoGraphic are documented here. Releases are managed by
 - **v1.0.1** `chore` [#3](https://github.com/Dark-Avian-Labs/InfoGraphic/pull/3): fix/lint warnings
 - **v1.0.2** `chore(deps)`: update package versions in package.json and pnpm-lock.yaml
 - **v1.0.3** `chore(deps)`: update vitest and related dependencies to version 4.1.11
+- **v1.0.4** `chore(deps-dev)` [#6](https://github.com/Dark-Avian-Labs/InfoGraphic/pull/6): Bump the development-dependencies group with 2 updates
