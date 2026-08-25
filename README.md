@@ -61,7 +61,7 @@ No environment variables or secrets are required — the app is fully local.
 
 ## Development
 
-Agent-oriented docs: [openwiki/quickstart.md](openwiki/quickstart.md).
+Agent notes: [AGENTS.md](AGENTS.md).
 Org engineering standards: AppBase `docs/org-standards/`.
 
 ## Editor
