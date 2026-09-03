@@ -10,3 +10,4 @@ All notable changes to InfoGraphic are documented here. Releases are managed by
 - **v1.0.4** `chore(deps-dev)` [#6](https://github.com/Dark-Avian-Labs/InfoGraphic/pull/6): Bump the development-dependencies group with 2 updates
 - **v1.0.5** `chore(deps-dev)` [#9](https://github.com/Dark-Avian-Labs/InfoGraphic/pull/9): Bump @types/node in the development-dependencies group
 - **v1.0.6** `chore(deps-dev)` [#11](https://github.com/Dark-Avian-Labs/InfoGraphic/pull/11): Bump the development-dependencies group with 2 updates
+- **v1.0.7** `chore(deps-dev)` [#12](https://github.com/Dark-Avian-Labs/InfoGraphic/pull/12): Bump the development-dependencies group with 3 updates
