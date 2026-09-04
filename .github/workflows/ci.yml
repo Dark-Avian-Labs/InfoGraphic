@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   version:
-    runs-on: blacksmith-8vcpu-ubuntu-2404
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     timeout-minutes: 10
     if: ${{ !contains(github.event.head_commit.message, 'chore(release)') && !contains(github.event.head_commit.message, 'build(release)') }}
 
@@ -61,7 +61,7 @@ jobs:
           echo "sha=$(git rev-parse origin/main)" >> "$GITHUB_OUTPUT"
 
   validate:
-    runs-on: blacksmith-8vcpu-ubuntu-2404
+    runs-on: blacksmith-4vcpu-ubuntu-2404
     timeout-minutes: 15
     needs: [version]
 
