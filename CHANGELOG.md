@@ -13,3 +13,4 @@ All notable changes to InfoGraphic are documented here. Releases are managed by
 - **v1.0.7** `chore(deps-dev)` [#12](https://github.com/Dark-Avian-Labs/InfoGraphic/pull/12): Bump the development-dependencies group with 3 updates
 - **v1.0.8** `ci` [#13](https://github.com/Dark-Avian-Labs/InfoGraphic/pull/13): use 4 vCPU runners
 - **v1.0.9** `ci` [#14](https://github.com/Dark-Avian-Labs/InfoGraphic/pull/14): run Node jobs on 2 vCPU
+- **v1.0.10** `chore(deps-dev)` [#15](https://github.com/Dark-Avian-Labs/InfoGraphic/pull/15): Bump the development-dependencies group with 2 updates
