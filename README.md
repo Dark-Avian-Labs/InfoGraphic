@@ -14,14 +14,15 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.x-06B6D4?logo=tailwindcss&logoColor=white&style=flat-square)
 [![Cursor](https://img.shields.io/badge/Cursor-IDE-141414?logo=cursor&logoColor=white&style=flat-square)](https://cursor.com)
 
-Local-first homelab topology editor. Drag devices, wire ports, export SVG or PNG. Brand icons, VLAN colors, orthogonal routing. Everything runs in the browser — no backend, database, account, or `.env`.
+InfoGraphic is a homelab map you can draw without standing up a server. Drag devices, wire ports, pick brand icons and VLAN colors, then export SVG or PNG when the rack photo is a lie.
+
+Everything runs in the browser. Drafts stay on this machine. No account, no database, no `.env`.
 
 ## Gotchas
 
 - Drafts autosave to `localStorage` (`infographic:document:v1`). Corrupt JSON falls back to the example homelab.
 - Connections use `fromPortId` / `toPortId`. Legacy `from` / `to` node IDs migrate on load only if both nodes still exist; otherwise the edge is dropped silently.
-- Export reads the **mounted SVG DOM**, not React state. PNG is 2× and fills from the canvas theme, not the app chrome.
-- No environment variables. `pnpm dev` / `pnpm preview` is enough.
+- Export reads the mounted SVG DOM, not React state. PNG is 2× and fills from the canvas theme, not the app chrome.
 
 ## License
 
