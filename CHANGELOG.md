@@ -18,3 +18,4 @@ All notable changes to InfoGraphic are documented here. Releases are managed by
 - **v1.0.12** `chore` [#18](https://github.com/Dark-Avian-Labs/InfoGraphic/pull/18): ci/scheduled dependency audit
 - **v1.0.13** `chore` [#19](https://github.com/Dark-Avian-Labs/InfoGraphic/pull/19): ci/security required check
 - **v1.0.14** `chore(deps-dev)` [#22](https://github.com/Dark-Avian-Labs/InfoGraphic/pull/22): Bump the development-dependencies group with 2 updates
+- **v1.0.15** `chore(deps-dev)` [#23](https://github.com/Dark-Avian-Labs/InfoGraphic/pull/23): Bump the development-dependencies group with 2 updates
