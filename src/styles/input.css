@@ -1,5 +1,4 @@
 @import 'tailwindcss';
-@import '@fontsource-variable/inter';
 @import '@fontsource-variable/geist';
 @import '@fontsource-variable/geist-mono';
 @import '@fontsource-variable/material-symbols-rounded';
@@ -83,7 +82,7 @@
 
 :root {
   --font-brand:
-    'Inter Variable', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    'Geist Variable', Geist, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --theme-mode: dark;
   --ascii-opacity: 0.05;
   --font-cascadia-mono: 'Cascadia Mono Variable', 'Cascadia Mono', ui-monospace, monospace;
@@ -328,35 +327,32 @@ html.dark {
     gap: 10px;
     min-width: 0;
     margin: 0;
+    font-size: clamp(1.35rem, 2.4vw, 2.25rem);
   }
 
   .brand-lockup__icon {
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
     object-fit: contain;
     flex: 0 0 auto;
+    filter: drop-shadow(0.07em 0.1em 0 #000);
   }
 
   .brand-lockup__title {
     margin: 0;
     min-width: 0;
     font-family: var(--font-brand);
-    font-size: clamp(1.35rem, 2.4vw, 2.25rem);
-    line-height: 1.2;
-    font-weight: 700;
+    font-size: 1em;
+    line-height: 1.05;
+    font-weight: 900;
     letter-spacing: 0.01em;
+    color: #fff;
   }
 
   .brand-lockup--fx {
-    text-shadow:
-      -0.05em 0 0.015em oklch(98.4% 0.004 264 / 0.45),
-      0.05em 0 0.015em oklch(98.4% 0.004 264 / 0.45);
-  }
-
-  html:not(.dark) .brand-lockup--fx {
-    text-shadow:
-      -0.05em 0 0.015em oklch(21% 0.04 266 / 0.35),
-      0.05em 0 0.015em oklch(21% 0.04 266 / 0.35);
+    -webkit-text-stroke: 0.045em #000;
+    paint-order: stroke fill;
+    text-shadow: 0.07em 0.1em 0 #000;
   }
 
   .btn {
