@@ -24,7 +24,7 @@
     "@icons-pack/react-simple-icons": "^13.15.1",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "simple-icons": "^16.33.0"
+    "simple-icons": "^16.34.0"
   },
   "devDependencies": {
     "@semantic-release/commit-analyzer": "^13.0.1",

@@ -188,8 +188,8 @@ importers:
         specifier: ^19.3.0
         version: 19.3.0(react@19.3.0)
       simple-icons:
-        specifier: ^16.33.0
-        version: 16.33.0
+        specifier: ^16.34.0
+        version: 16.34.0
     devDependencies:
       '@semantic-release/commit-analyzer':
         specifier: ^13.0.1
@@ -2107,8 +2107,8 @@ packages:
     resolution: {integrity: sha512-iuh+gPf28RkltuJC7W5MRi6XAjTDCAPC/prJUpQoG4vIP3MJZ+GTydVnodXA7pwvTKb2cA0m9OFZW/cdWy/I/w==}
     engines: {node: '>=6'}
 
-  simple-icons@16.33.0:
-    resolution: {integrity: sha512-z14u6A8ngAg9mgERRsNO8YkjIMefehIpBk7A8Dz3Gd91945qFP19MLPSHgV4z8P5u/MRYd5e07OTzaDoB4d6qA==}
+  simple-icons@16.34.0:
+    resolution: {integrity: sha512-UTxKn0PVspk84B2hHF3Dqiqht1yDjJmDc/t4cO7PyCQxCMk6OjEu95pnpGjhLaGeQ4qBrGASbefTIe/+czrX7g==}
     engines: {node: '>=0.12.18'}
 
   skin-tone@2.0.0:
@@ -4007,7 +4007,7 @@ snapshots:
       figures: 2.0.0
       pkg-conf: 2.1.0
 
-  simple-icons@16.33.0: {}
+  simple-icons@16.34.0: {}
 
   skin-tone@2.0.0:
     dependencies:
