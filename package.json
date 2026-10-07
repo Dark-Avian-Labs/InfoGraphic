@@ -24,7 +24,7 @@
     "@icons-pack/react-simple-icons": "^13.15.1",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "simple-icons": "^16.33.0"
+    "simple-icons": "^16.34.0"
   },
   "devDependencies": {
     "@semantic-release/commit-analyzer": "^13.0.1",
@@ -36,9 +36,9 @@
     "@types/node": "^26.6.4",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
-    "@vitejs/plugin-react": "^6.1.1",
-    "oxfmt": "^0.71.0",
-    "oxlint": "^1.86.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "oxfmt": "^0.72.0",
+    "oxlint": "^1.87.0",
     "semantic-release": "25.0.9",
     "tailwindcss": "^4.3.3",
     "typescript": "~7.0.2",
@@ -49,5 +49,5 @@
     "node": ">=26.0.0",
     "pnpm": ">=12.0.0"
   },
-  "packageManager": "pnpm@12.8.1"
+  "packageManager": "pnpm@12.9.1"
 }
