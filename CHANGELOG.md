@@ -29,3 +29,4 @@ All notable changes to InfoGraphic are documented here. Releases are managed by
 - **v1.0.23** `chore`: Merge pull request 'Explain the app for readers and self-hosters' (#33) from docs/readme into main
 - **v1.1.0** `chore`: Merge pull request 'Replace the header feather and the soft wordmark glow' (#34) from feat/header-mark into main
 - **v1.1.1** `chore`: Merge pull request 'chore(deps): update dependencies to latest' (#35) from chore/deps-latest into main
+- **v1.1.2** `chore`: Merge pull request 'ci: rebuild dependency pull requests from an @actions rebase comment' (#36) from ci/actions-rebase into main
