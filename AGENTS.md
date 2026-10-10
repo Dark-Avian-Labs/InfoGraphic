@@ -2,7 +2,7 @@
 
 ## Org standards
 
-CI/README/validate conventions live in AppBase [`docs/org-standards/`](../AppBase/docs/org-standards/). This repo is **semantic-release Track A** (version → validate → discord-status; no deploy yet). It does **not** follow the AppBase design system.
+CI/README/validate conventions live in AppBase [`docs/org-standards/`](../AppBase/docs/org-standards/). This repo tags `vX.Y.Z` from `release.mjs` after validate. No deploy yet. It does **not** follow the AppBase design system.
 
 ## Overview
 
