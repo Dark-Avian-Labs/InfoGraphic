@@ -10,51 +10,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  version:
-    runs-on: build-node26
-    timeout-minutes: 10
-    if: ${{ !contains(github.event.head_commit.message, 'chore(release)') && !contains(github.event.head_commit.message, 'build(release)') }}
-
-    outputs:
-      target_sha: ${{ steps.target.outputs.sha }}
-
-    steps:
-      - name: Checkout full history
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.CI_PAT }}
-
-      - name: Enable pnpm
-        run: npm install -g pnpm@$(node -p 'require("./package.json").packageManager.replace(/^pnpm@/, "")')
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Bump version
-        run: pnpm exec semantic-release
-        env:
-          GITHUB_TOKEN: ${{ secrets.CI_PAT }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          MERGE_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-
-      - name: Resolve target SHA
-        id: target
-        shell: bash
-        run: |
-          git fetch origin main
-          echo "sha=$(git rev-parse origin/main)" >> "$GITHUB_OUTPUT"
-
   validate:
     runs-on: build-node26
     timeout-minutes: 15
-    needs: [version]
 
     steps:
-      - name: Checkout release target
+      - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          ref: ${{ needs.version.outputs.target_sha }}
 
       - name: Enable pnpm
         run: npm install -g pnpm@$(node -p 'require("./package.json").packageManager.replace(/^pnpm@/, "")')
@@ -68,10 +30,27 @@ jobs:
       - name: Build project
         run: pnpm run build
 
+  release:
+    runs-on: build-node26
+    timeout-minutes: 10
+    needs: [validate]
+
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Publish release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          RELEASE_PUBLISH: '1'
+        run: node release.mjs
+
   discord-status:
     runs-on: build-node26
     timeout-minutes: 10
-    needs: [version, validate]
+    needs: [validate, release]
     if: ${{ always() && github.ref == 'refs/heads/main' }}
 
     steps:
