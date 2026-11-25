@@ -179,8 +179,8 @@ importers:
         specifier: ^5.3.9
         version: 5.3.9
       '@icons-pack/react-simple-icons':
-        specifier: ^13.15.1
-        version: 13.15.1(react@19.3.1)
+        specifier: ^13.16.0
+        version: 13.16.0(react@19.3.1)
       react:
         specifier: ^19.3.1
         version: 19.3.1
@@ -236,8 +236,8 @@ packages:
   '@fontsource-variable/material-symbols-rounded@5.3.9':
     resolution: {integrity: sha512-gM663V+62mQ7wUcXyWs/eU27ZSMHT0F5f43mus/RgwkeExZj+rnnYlvGm4QVBrJlL/zX9XRYIdyU/fhbFcJtxA==}
 
-  '@icons-pack/react-simple-icons@13.15.1':
-    resolution: {integrity: sha512-S35E7vJlJzMeoqjwwI7ZmQUJ2W+2KspnB6bc49KdoDGwp5mCgAy9L3sscfWMewQSMgBdPU8KWWwpSGq5DJyAFw==}
+  '@icons-pack/react-simple-icons@13.16.0':
+    resolution: {integrity: sha512-LOs+OW7CawzA+P6btA2XUQI4vWfAZ17t1b8GoPJjRXCHZN0cVuWJSvMdWjQZzgdgDl/PYJ0NTeGxUwnAmoLpuw==}
     peerDependencies:
       react: ^16.13 || ^17 || ^18 || ^19
 
@@ -1201,7 +1201,7 @@ snapshots:
 
   '@fontsource-variable/material-symbols-rounded@5.3.9': {}
 
-  '@icons-pack/react-simple-icons@13.15.1(react@19.3.1)':
+  '@icons-pack/react-simple-icons@13.16.0(react@19.3.1)':
     dependencies:
       react: 19.3.1
 
