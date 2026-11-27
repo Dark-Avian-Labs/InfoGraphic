@@ -28,8 +28,8 @@
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.5",
-    "@types/node": "^26.6.7",
-    "@types/react": "^19.3.1",
+    "@types/node": "^26.6.10",
+    "@types/react": "^19.3.3",
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.3.0",
     "oxfmt": "^0.80.0",
@@ -37,7 +37,7 @@
     "tailwindcss": "^4.3.5",
     "typescript": "~7.0.2",
     "vite": "^8.3.8",
-    "vitest": "^5.1.1"
+    "vitest": "^5.1.2"
   },
   "engines": {
     "node": ">=26.0.0",
